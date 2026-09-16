@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таблица умножения — Математика и котики</title>
+
+<style>
+  :root {
+    --ink: #20283b;
+    --paper: #fff1f8;
+    --pink: #df6fa5;
+    --pink-dark: #c95189;
+    --line: #e6a0c5;
+
+    --green: #78bb82;
+    --green-bg: #e5f4e7;
+
+    --red: #df777d;
+    --red-bg: #fae4e7;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+
+    background:
+      radial-gradient(
+        circle at 12% 25%,
+        rgba(223,111,165,.12) 0 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 88% 75%,
+        rgba(223,111,165,.10) 0 4px,
+        transparent 5px
+      ),
+      linear-gradient(
+        135deg,
+        transparent 48%,
+        rgba(223,111,165,.045) 49%,
+        transparent 51%
+      ) 0 0 / 44px 44px,
+      var(--paper);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+
+  /* =========================
+     ПЛАШКА "МАТЕМАТИКА И КОТИКИ"
+     ========================= */
+
+  .brand-banner {
+    position: fixed;
+
+    top: 22px;
+    left: 22px;
+
+    width: min(430px, 38vw);
+
+    z-index: 10;
+  }
+
+  .brand-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+
+  /* =========================
+     ДЕКОР
+     ========================= */
+
+  .landing-doodle {
+    position: fixed;
+
+    z-index: 1;
+
+    color: #e27caf;
+
+    font-family:
+      "Comic Sans MS",
+      "Segoe Print",
+      cursive;
+
+    pointer-events: none;
+  }
+
+  .doodle-star {
+    font-size: 64px;
+  }
+
+  .star-one {
+    right: 10%;
+    top: 14%;
+  }
+
+  .star-two {
+    left: 7%;
+    bottom: 24%;
+
+    font-size: 52px;
+  }
+
+  .doodle-heart {
+    font-size: 60px;
+  }
+
+  .heart-one {
+    right: 29%;
+    bottom: 17%;
+  }
+
+  .heart-two {
+    right: 21%;
+    top: 51%;
+
+    font-size: 42px;
+  }
+
+  .doodle-paw {
+    left: 31%;
+    bottom: 18%;
+
+    font-size: 42px;
+
+    transform: rotate(-18deg);
+  }
+
+
+  /* =========================
+     КОТ НА ПЕРВОЙ СТРАНИЦЕ
+     ========================= */
+
+  .landing-cat {
+    position: fixed;
+
+    right: 4%;
+    bottom: 1%;
+
+    width: min(410px, 32vw);
+
+    z-index: 3;
+  }
+
+  .landing-cat img {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    filter:
+      drop-shadow(
+        0 12px 4px rgba(223,111,165,.16)
+      );
+  }
+
+  .cat-oval {
+    position: absolute;
+
+    width: 88%;
+    height: 22%;
+
+    left: 7%;
+    bottom: 2%;
+
+    border-radius: 50%;
+
+    background: #f6b7d5;
+
+    z-index: -1;
+  }
+
+
+  /* =========================
+     СТРАНИЦЫ
+     ========================= */
+
+  .screen {
+    width: min(1100px, 100vw);
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 100px 60px 60px;
+  }
+
+  .screen.active {
+    display: flex;
+  }
+
+
+  /* =========================
+     ПЕРВАЯ СТРАНИЦА
+     ========================= */
+
+  #startScreen {
+    text-align: center;
+  }
+
+  #startScreen .card {
+    width: min(650px, 72vw);
+
+    background: transparent;
+
+    border: 0;
+
+    box-shadow: none;
+
+    padding: 40px 20px 80px;
+
+    position: relative;
+
+    z-index: 4;
+  }
+
+  #startScreen h1 {
+    margin: 0 0 38px;
+
+    font-family:
+      "Comic Sans MS",
+      "Segoe Print",
+      Arial,
+      sans-serif;
+
+    font-size: clamp(48px, 6vw, 78px);
+
+    line-height: .94;
+
+    font-weight: 700;
+
+    letter-spacing: -.045em;
+
+    color: #cf4f87;
+
+    text-shadow:
+      0 2px 0 rgba(255,255,255,.7);
+  }
+
+  #startScreen .subtitle {
+    margin: 28px auto 0;
+
+    max-width: 410px;
+
+    color: #d05d91;
+
+    font-family:
+      "Comic Sans MS",
+      "Segoe Print",
+      Arial,
+      sans-serif;
+
+    font-size: clamp(20px, 2.2vw, 29px);
+
+    line-height: 1.05;
+
+    font-weight: 700;
+  }
+
+
+  /* =========================
+     КНОПКА НАЧАТЬ
+     ========================= */
+
+  .start {
+    padding: 17px 55px;
+
+    border: 0;
+
+    border-radius: 24px;
+
+    background: var(--pink);
+
+    color: white;
+
+    box-shadow:
+      0 7px 0 var(--pink-dark);
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    min-width: 260px;
+
+    cursor: pointer;
+
+    transition:
+      transform .15s ease,
+      background .15s ease;
+  }
+
+  .start::after {
+    content: "  →";
+
+    font-size: 30px;
+
+    vertical-align: -2px;
+  }
+
+  .start:hover {
+    transform: translateY(-3px);
+
+    background: #d9629b;
+  }
+
+  .start:active {
+    box-shadow:
+      0 3px 0 var(--pink-dark);
+
+    transform: translateY(2px);
+  }
+
+
+  /* =========================
+     ИГРОВАЯ СТРАНИЦА
+     ========================= */
+
+  #gameScreen {
+    padding-top: 80px;
+  }
+
+  .game-wrap {
+    width: min(760px, calc(100vw - 120px));
+
+    text-align: center;
+
+    z-index: 4;
+  }
+
+
+  /* =========================
+     СТАТИСТИКА
+     ========================= */
+
+  .stats {
+    display: flex;
+
+    gap: 12px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 24px;
+  }
+
+  .stat {
+    min-width: 130px;
+
+    padding: 11px 16px;
+
+    background: rgba(255,255,255,.88);
+
+    border:
+      2px solid var(--line);
+
+    border-radius: 16px;
+
+    font-weight: 700;
+
+    font-size: 15px;
+  }
+
+  .stat strong {
+    font-size: 20px;
+
+    margin-left: 5px;
+  }
+
+  .stat.correct strong {
+    color: #559b58;
+  }
+
+  .stat.wrong strong {
+    color: #c45c55;
+  }
+
+  .stat.percent strong {
+    color: #c9578e;
+  }
+
+
+  /* =========================
+     КАРТОЧКА С ПРИМЕРОМ
+     ========================= */
+
+  .question-card {
+    background: rgba(255,255,255,.95);
+
+    border:
+      3px solid #e6a0c5;
+
+    border-radius: 30px;
+
+    padding: 42px 38px 34px;
+
+    box-shadow:
+      0 16px 40px
+      rgba(100,45,75,.10);
+  }
+
+  .question {
+    font-family:
+      "Comic Sans MS",
+      "Segoe Print",
+      Arial,
+      sans-serif;
+
+    font-size:
+      clamp(48px, 8vw, 76px);
+
+    font-weight: 700;
+
+    letter-spacing: -.035em;
+
+    margin: 0 0 30px;
+  }
+
+
+  /* =========================
+     ВАРИАНТЫ ОТВЕТА
+     ========================= */
+
+  .answers {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  .answer {
+    min-height: 68px;
+
+    border-radius: 17px;
+
+    border:
+      2px solid var(--line);
+
+    background: white;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: var(--ink);
+
+    cursor: pointer;
+
+    transition:
+      transform .12s ease,
+      background .12s ease;
+  }
+
+  .answer:hover:not(:disabled) {
+    background: #fff4fa;
+
+    border-color: #df7faf;
+
+    transform: translateY(-2px);
+  }
+
+  .answer.correct {
+    background: var(--green-bg);
+
+    border-color: var(--green);
+
+    color: #39733b;
+  }
+
+  .answer.wrong {
+    background: var(--red-bg);
+
+    border-color: var(--red);
+
+    color: #a64740;
+  }
+
+  .answer:disabled {
+    cursor: default;
+  }
+
+
+  /* =========================
+     ПОДСКАЗКА
+     ========================= */
+
+  .hint {
+    height: 22px;
+
+    margin-top: 18px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #a66c88;
+  }
+
+
+  /* =========================
+     МОБИЛЬНАЯ ВЕРСИЯ
+     ========================= */
+
+  @media (max-width: 650px) {
+
+    .brand-banner {
+      top: 10px;
+      left: 10px;
+
+      width: 275px;
+    }
+
+    .landing-cat {
+      width: 185px;
+
+      right: -6px;
+      bottom: 3px;
+    }
+
+    .doodle-star {
+      font-size: 38px;
+    }
+
+    .doodle-heart {
+      font-size: 38px;
+    }
+
+    .doodle-paw {
+      font-size: 28px;
+
+      left: 18%;
+      bottom: 18%;
+    }
+
+    .screen {
+      padding:
+        90px
+        20px
+        30px;
+    }
+
+    #startScreen .card {
+      width: 100%;
+
+      padding:
+        50px
+        8px
+        150px;
+    }
+
+    #startScreen h1 {
+      font-size:
+        clamp(42px, 13vw, 62px);
+    }
+
+    #startScreen .subtitle {
+      max-width: 300px;
+
+      font-size: 20px;
+    }
+
+    .start {
+      min-width: 210px;
+
+      padding:
+        15px
+        45px;
+
+      font-size: 21px;
+    }
+
+    .game-wrap {
+      width:
+        calc(100vw - 36px);
+    }
+
+    .question-card {
+      padding:
+        30px
+        16px
+        24px;
+    }
+
+    .answers {
+      gap: 10px;
+    }
+
+    .answer {
+      min-height: 62px;
+
+      font-size: 22px;
+    }
+
+    .stat {
+      min-width: 105px;
+    }
+  }
+</style>
+</head>
+
+
+<body>
+
+<!-- Плашка из файла 1 -->
+<div class="brand-banner">
+  <img
+    src="Заставки МИК новые-4.png"
+    alt="Математика и котики"
+  >
+</div>
+
+
+<!-- Декоративные элементы -->
+<div class="landing-doodle doodle-star star-one">✧</div>
+
+<div class="landing-doodle doodle-star star-two">✦</div>
+
+<div class="landing-doodle doodle-heart heart-one">♡</div>
+
+<div class="landing-doodle doodle-heart heart-two">♡</div>
+
+<div class="landing-doodle doodle-paw">♥</div>
+
+
+<!-- Кот из файла 2 -->
+<div class="landing-cat">
+
+  <div class="cat-oval"></div>
+
+  <img
+    src="Заставки МИК новые-5.png"
+    alt="Серый кот"
+  >
+
+</div>
+
+
+<!-- =========================
+     СТРАНИЦА 1
+     ========================= -->
+
+<section
+  id="startScreen"
+  class="screen active"
+>
+
+  <div class="card">
+
+    <h1>
+      Таблица<br>
+      умножения
+    </h1>
+
+    <p class="subtitle">
+      выучит даже тот, у кого лапки
+    </p>
+
+    <button
+      class="start"
+      id="startBtn"
+    >
+      Начать
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     СТРАНИЦА 2
+     ========================= -->
+
+<section
+  id="gameScreen"
+  class="screen"
+>
+
+  <div class="game-wrap">
+
+
+    <!-- Статистика -->
+
+    <div class="stats">
+
+      <div class="stat correct">
+        Верно
+        <strong id="correct">0</strong>
+      </div>
+
+      <div class="stat wrong">
+        Неверно
+        <strong id="wrong">0</strong>
+      </div>
+
+      <div class="stat percent">
+        Верно в процентах
+        <strong id="percent">0,0</strong> %
+      </div>
+
+    </div>
+
+
+    <!-- Пример -->
+
+    <div class="question-card">
+
+      <div
+        class="question"
+        id="question"
+      >
+        7 × 8 =
+      </div>
+
+
+      <!-- Ответы -->
+
+      <div
+        class="answers"
+        id="answers"
+      ></div>
+
+
+      <div
+        class="hint"
+        id="hint"
+      >
+        Выбери ответ
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+(() => {
+
+  const startScreen =
+    document.getElementById(
+      'startScreen'
+    );
+
+  const gameScreen =
+    document.getElementById(
+      'gameScreen'
+    );
+
+  const startBtn =
+    document.getElementById(
+      'startBtn'
+    );
+
+  const questionEl =
+    document.getElementById(
+      'question'
+    );
+
+  const answersEl =
+    document.getElementById(
+      'answers'
+    );
+
+  const correctEl =
+    document.getElementById(
+      'correct'
+    );
+
+  const wrongEl =
+    document.getElementById(
+      'wrong'
+    );
+
+  const percentEl =
+    document.getElementById(
+      'percent'
+    );
+
+  const hintEl =
+    document.getElementById(
+      'hint'
+    );
+
+
+  /* =========================
+     СОСТОЯНИЕ ИГРЫ
+     ========================= */
+
+  let correct = 0;
+
+  let wrong = 0;
+
+  let locked = false;
+
+  let nextTimer = null;
+
+
+  /* =========================
+     СЛУЧАЙНОЕ ЧИСЛО
+     ========================= */
+
+  const rand = (
+    min,
+    max
+  ) => {
+
+    return Math.floor(
+      Math.random() *
+      (max - min + 1)
+    ) + min;
+
+  };
+
+
+  /* =========================
+     ОБНОВЛЕНИЕ СТАТИСТИКИ
+     ========================= */
+
+  function updateStats() {
+
+    const total =
+      correct + wrong;
+
+    const percent =
+      total
+        ? (correct / total) * 100
+        : 0;
+
+    correctEl.textContent =
+      correct;
+
+    wrongEl.textContent =
+      wrong;
+
+    percentEl.textContent =
+      percent
+        .toFixed(1)
+        .replace('.', ',');
+
+  }
+
+
+  /* =========================
+     СОЗДАНИЕ ОТВЕТОВ
+     ========================= */
+
+  function makeOptions(answer) {
+
+    const set =
+      new Set([answer]);
+
+
+    while (set.size < 4) {
+
+      const offset =
+        rand(1, 8) *
+        (
+          Math.random() < 0.5
+            ? -1
+            : 1
+        );
+
+      const candidate =
+        answer + offset;
+
+
+      if (
+        candidate > 0 &&
+        candidate <= 81
+      ) {
+
+        set.add(candidate);
+
+      }
+
+    }
+
+
+    return [...set].sort(
+      () => Math.random() - 0.5
+    );
+
+  }
+
+
+  /* =========================
+     НОВЫЙ ПРИМЕР
+     ========================= */
+
+  function nextQuestion() {
+
+    locked = false;
+
+    hintEl.textContent =
+      'Выбери ответ';
+
+
+    // Числа от 2 до 9
+    const a = rand(2, 9);
+
+    const b = rand(2, 9);
+
+    const answer =
+      a * b;
+
+
+    questionEl.textContent =
+      `${a} × ${b} =`;
+
+
+    answersEl.innerHTML =
+      '';
+
+
+    makeOptions(answer)
+      .forEach(value => {
+
+        const btn =
+          document.createElement(
+            'button'
+          );
+
+        btn.className =
+          'answer';
+
+        btn.textContent =
+          value;
+
+
+        btn.addEventListener(
+          'click',
+          () =>
+            chooseAnswer(
+              btn,
+              value,
+              answer
+            )
+        );
+
+
+        answersEl.appendChild(
+          btn
+        );
+
+      });
+
+  }
+
+
+  /* =========================
+     ОБРАБОТКА ОТВЕТА
+     ========================= */
+
+  function chooseAnswer(
+    clicked,
+    value,
+    answer
+  ) {
+
+    if (locked) return;
+
+    locked = true;
+
+
+    const buttons =
+      [
+        ...answersEl.querySelectorAll(
+          '.answer'
+        )
+      ];
+
+
+    /* Правильный ответ */
+
+    if (value === answer) {
+
+      correct++;
+
+      clicked.classList.add(
+        'correct'
+      );
+
+      hintEl.textContent =
+        'Правильно!';
+
+    }
+
+
+    /* Неправильный ответ */
+
+    else {
+
+      wrong++;
+
+      clicked.classList.add(
+        'wrong'
+      );
+
+
+      const right =
+        buttons.find(
+          btn =>
+            Number(
+              btn.textContent
+            ) === answer
+        );
+
+
+      if (right) {
+
+        right.classList.add(
+          'correct'
+        );
+
+      }
+
+
+      hintEl.textContent =
+        'Правильный ответ подсвечен зелёным';
+
+    }
+
+
+    // Запрещаем нажимать ответы повторно
+
+    buttons.forEach(
+      btn =>
+        btn.disabled = true
+    );
+
+
+    updateStats();
+
+
+    // Следующий пример через 0,4 секунды
+
+    clearTimeout(nextTimer);
+
+    nextTimer =
+      setTimeout(
+        nextQuestion,
+        400
+      );
+
+  }
+
+
+  /* =========================
+     КНОПКА "НАЧАТЬ"
+     ========================= */
+
+  startBtn.addEventListener(
+    'click',
+    () => {
+
+      // Новая сессия
+
+      correct = 0;
+
+      wrong = 0;
+
+
+      updateStats();
+
+
+      // Переходим на игру
+
+      startScreen.classList.remove(
+        'active'
+      );
+
+      gameScreen.classList.add(
+        'active'
+      );
+
+
+      // Первый пример
+
+      nextQuestion();
+
+    }
+  );
+
+})();
+
+</script>
+
+</body>
+</html>
